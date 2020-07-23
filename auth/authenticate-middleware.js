@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-// use a scale for checking user roles since instructor users
+// checking user roles since instructor users
 // should still have access to client user endpoints,
 // but client users shouldn't have access to instructor endpoints.
 const roles = ["Client", "Instructor"];
@@ -12,7 +12,7 @@ function restrict(role) {
     };
 
     try {
-      // manually pull the token that got sent from the client's cookie jar
+      // manually pulling the token that got sent from the client's cookie jar
       const token = req.cookies.token;
       if (!token) {
         return res.status(401).json(authError);
@@ -24,7 +24,7 @@ function restrict(role) {
           return res.status(401).json(authError);
         }
 
-        // check if the role in our token is above or equal to the required role for the endpoint
+        // checks if the role in our token is above or equal to the required role for the endpoint
         if (role && roles.indexOf(decoded.userRole) < roles.indexOf(role)) {
           return res.status(401).json(authError);
         }
