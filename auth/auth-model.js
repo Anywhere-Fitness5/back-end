@@ -10,11 +10,15 @@ function add(user) {
 }
 
 function find() {
-  return db("users").select("id", "username").orderBy("id");
+  return db("users")
+    .select("id", "username", "email", "isInstructor")
+    .orderBy("id");
 }
 
 function findBy(filter) {
-  return db("users").select("id", "username", "password").where(filter);
+  return db("users")
+    .select("id", "username", "password", "email", "isInstructor")
+    .where(filter);
 }
 
 function findById(id) {

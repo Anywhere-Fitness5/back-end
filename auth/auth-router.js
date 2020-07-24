@@ -16,7 +16,7 @@ router.get("/users", restrict("Client"), async (req, res, next) => {
 
 router.post("/users", async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, email } = req.body;
     const user = await Users.findBy({ username }).first();
 
     if (user) {
@@ -27,6 +27,7 @@ router.post("/users", async (req, res, next) => {
 
     const newUser = await Users.add({
       username,
+      email,
       // hashes the password with a time complexity of "14"
       password: await bcrypt.hash(password, 14),
     });
