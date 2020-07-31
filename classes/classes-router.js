@@ -3,7 +3,7 @@ const instructor = require("./classes-model");
 const restrict = require("../auth/authenticate-middleware");
 const router = express.Router();
 
-router.get("/", restrict("Client"), (req, res) => {
+router.get("/", (req, res) => {
   instructor
     .getClasses()
     .then((classes) => {
@@ -18,7 +18,7 @@ router.get("/", restrict("Client"), (req, res) => {
     });
 });
 
-router.get("/:id", restrict("Client"), (req, res) => {
+router.get("/:id", (req, res) => {
   instructor
     .getClassById(req.params.id)
     .then((classes) => {
@@ -33,7 +33,7 @@ router.get("/:id", restrict("Client"), (req, res) => {
     });
 });
 
-router.post("/", restrict("Client"), (req, res) => {
+router.post("/", (req, res) => {
   instructor
     .addClass(req.body)
     .then((classes) => {
@@ -44,7 +44,7 @@ router.post("/", restrict("Client"), (req, res) => {
     });
 });
 
-router.put("/:id", restrict("Client"), (req, res) => {
+router.put("/:id", (req, res) => {
   instructor
     .updateClass(req.params.id, req.body)
     .then((classes) => {
@@ -61,7 +61,7 @@ router.put("/:id", restrict("Client"), (req, res) => {
     });
 });
 
-router.delete("/:id", restrict("Client"), (req, res) => {
+router.delete("/:id", (req, res) => {
   instructor
     .removeClass(req.params.id)
     .then((classes) => {
